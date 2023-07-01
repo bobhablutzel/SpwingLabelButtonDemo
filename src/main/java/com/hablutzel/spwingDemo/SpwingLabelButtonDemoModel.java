@@ -14,7 +14,7 @@ import java.io.Serial;
  * a string. The field is bound to the label created by
  * the view, so that changes to the model are reflected
  * in the view automatically. <br>
- * Swping supports automatic saving and opening for
+ * Spwing supports automatic saving and opening for
  * models that implement serialization. The {@link Model}
  * annotation gives the model an opportunity to define the
  * file extension of the files. By doing this, the application
