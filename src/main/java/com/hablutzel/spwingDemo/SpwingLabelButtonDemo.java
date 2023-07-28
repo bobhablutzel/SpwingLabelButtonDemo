@@ -2,7 +2,9 @@ package com.hablutzel.spwingDemo;
 
 
 import com.hablutzel.spwing.Spwing;
-import com.hablutzel.spwing.annotations.Application;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -12,7 +14,8 @@ import com.hablutzel.spwing.annotations.Application;
  * all the key objects - they will be in the same
  * package or a subpackage.
  */
-@Application
+@Service
+@Scope("singleton")
 public class SpwingLabelButtonDemo {
 
     public static void main(String[] args) {
@@ -20,4 +23,11 @@ public class SpwingLabelButtonDemo {
         // Launch Spwing
         Spwing.launch(SpwingLabelButtonDemo.class);
     }
+
+    @Bean
+    @Scope("singleton")
+    public String launchCommand() {
+        return "cmdNew";
+    }
+
 }

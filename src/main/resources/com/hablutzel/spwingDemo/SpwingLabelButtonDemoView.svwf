@@ -5,7 +5,7 @@
  * - A button to change the text in the model
  */
 components {
-    frame: JFrame(title="Spwing Demo", preferredSize=(400, 200));
+    frame: JFrame(preferredSize=(400, 200));
     label: JLabel(horizontalAlignment=$CENTER); // Note the use of SwingConstants.CENTER
     button: JButton(text="Click me");
 }
@@ -13,10 +13,11 @@ components {
 // Bind the label to the text field. This is on the model by
 // default but we can specify other beans instead.
 // Since we want the text to automatically update when the
-// text changes, we set a trigger event that the model
-// signals when the text changes ("evtTextFieldChanged");
+// text changes, the model uses a PropertyChangeListener and
+// signals changes to "textField" when the value changes in the model
+// The Spwing framework automatically handles signal cycles.
 bind {
-    label.text => "textField" ["evtTextFieldChanged"];
+    label.text => "textField";
 }
 
 // Layout the frame, with the label in the center and the button at the bottom

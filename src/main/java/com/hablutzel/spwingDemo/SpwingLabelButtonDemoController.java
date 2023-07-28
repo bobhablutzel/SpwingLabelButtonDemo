@@ -1,7 +1,9 @@
 package com.hablutzel.spwingDemo;
 
 
-import com.hablutzel.spwing.annotations.Controller;
+import com.hablutzel.spwing.model.ControllerFor;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -13,8 +15,9 @@ import com.hablutzel.spwing.annotations.Controller;
  * For this demo, the button reacts by changing
  * the text of the model.
  */
-@Controller
-public class SpwingLabelButtonDemoController {
+@Service
+@Scope("document")
+public class SpwingLabelButtonDemoController implements ControllerFor<SpwingLabelButtonDemoModel> {
 
     /**
      * Handle the button click. Note that no wiring
@@ -47,7 +50,7 @@ public class SpwingLabelButtonDemoController {
      * @param model The active model.
      */
     @SuppressWarnings("unused")
-    public void onButton_Clicked( SpwingLabelButtonDemoModel model) {
+    public void onButton_Clicked( final SpwingLabelButtonDemoModel model) {
 
         // Change the text for the model
         model.setTextField("Button was clicked");

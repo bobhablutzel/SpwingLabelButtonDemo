@@ -2,11 +2,11 @@ package com.hablutzel.spwingDemo;
 
 
 import com.hablutzel.spwing.annotations.Model;
-import com.hablutzel.spwing.model.BaseModel;
+import com.hablutzel.spwing.model.ModelConfiguration;
+import com.hablutzel.spwing.model.PropertyChangeModel;
 import lombok.Getter;
-
-import java.io.Serial;
-
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 /**
  * The main model for the demo. The model contains a
@@ -21,12 +21,10 @@ import java.io.Serial;
  * can automatically detect when the model changes and
  * save the file as necessary.
  */
-@Model(extensions = {"txt"})
-public class SpwingLabelButtonDemoModel extends BaseModel {
-
-    @Serial
-    private static final long serialVersionUID = 78432508723L;
-
+@Service
+@Scope("document")
+public class SpwingLabelButtonDemoModel extends PropertyChangeModel
+                                        implements ModelConfiguration<SpwingLabelButtonDemoModel> {
 
     /**
      * The data for this model - a simple text field.
@@ -40,10 +38,10 @@ public class SpwingLabelButtonDemoModel extends BaseModel {
      * a document event when the text field changes. The
      * model signals this by noting that the state changed,
      * with the event to signal. This is functionality inherited
-     * from the {@link BaseModel} class. Inheriting from this
+     * from the {@link PropertyChangeModel} class. Inheriting from this
      * class is <b>not</b> required by the framework, but it
      * does provide some useful functionality such as the
-     * {@link BaseModel#stateChanged(String)}
+     * {@link PropertyChangeModel#signalChange(String, Object, Object)}
      *
      * @param textField The new value of the field
      */
@@ -52,7 +50,8 @@ public class SpwingLabelButtonDemoModel extends BaseModel {
         // Save the new value, and signal the change
         // This is sufficient for the bound label to be
         // updated in the view.
+        String oldValue = this.textField;
         this.textField = textField;
-        this.stateChanged("evtTextFieldChanged");
+        this.signalChange("textField", oldValue, textField );
     }
 }
